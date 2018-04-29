@@ -85,5 +85,14 @@ public class Player1Controller : MonoBehaviour
             }
         }
 
+	//disable mag for player 1
+	if (Input.GetKeyDown(KeyCode.Q))
+        {
+	    GameObject p = GameObject.Find("player1");
+	    MagneticField player1controller = p.GetComponent<MagneticField>();
+            player1controller.strength = 0;
+	    Debug.Log(player1controller.strength);
+        }
+
     }
 }
