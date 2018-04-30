@@ -6,6 +6,14 @@ public class Player2Controller : MonoBehaviour {
 
     public float moveSpeed = 5;
     public GameObject partner;
+
+    //public float mass;
+    //mass:normal=2,small=1,big=3
+    public Rigidbody2D rb;
+
+	private bool mg_on = true;
+	private float mg_strength;
+
     // Use this for initialization
     void Start () {
 		
@@ -13,16 +21,18 @@ public class Player2Controller : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        /* if(Input.GetAxisRaw("Horizontal") > 0.5f || Input.GetAxisRaw("Horizontal") < -0.5f )
+        
+        //mass:
+        if (GM.sizeRatio == 2)
         {
-            transform.Translate(new Vector3(Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime, 0f, 0f));
+            rb.mass = 1;
+        }
+        if (GM.sizeRatio == 3)
+        {
+            rb.mass = 3;
         }
 
-        if (Input.GetAxisRaw("Vertical") > 0.5f || Input.GetAxisRaw("Vertical") < -0.5f)
-        {a
-            transform.Translate(new Vector3(0f, Input.GetAxisRaw("Vertical") * moveSpeed * Time.deltaTime, 0f));
-        }*/
-
+        //move:
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Translate(new Vector3(-1 * moveSpeed * Time.deltaTime, 0f, 0f));
@@ -34,7 +44,7 @@ public class Player2Controller : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            if (GM.sizeRatio + 1 <= 3)
+            if (GM.sizeRatio ==3)
             {
                 transform.Translate(new Vector3(0f, 1.25f * moveSpeed * Time.deltaTime, 0f));
             }
@@ -49,23 +59,51 @@ public class Player2Controller : MonoBehaviour {
             transform.Translate(new Vector3(0f, -1 * moveSpeed * Time.deltaTime, 0f));
         }
 
+		//disable mag
+		if (Input.GetKeyDown (KeyCode.Minus)) 
+		{
+			if (mg_on) {
+				MagneticField_S mf = gameObject.GetComponent<MagneticField_S> ();
+				mg_strength = mf.strength;
+				mf.strength = 0;
+				mg_on = false;
+			} else {
+				MagneticField_S mf = gameObject.GetComponent<MagneticField_S> ();
+				mf.strength = mg_strength;
+				mg_on = true;
+			}
+		}
 
-        //change Size
-        if (Input.GetKeyDown(KeyCode.Minus))
+
+        //change Size:
+        if (Input.GetKeyDown(KeyCode.Equals))
         {
             var x = gameObject.transform.localScale.x;
             var y = gameObject.transform.localScale.y;
             var x2 = partner.gameObject.transform.localScale.x;
             var y2 = partner.gameObject.transform.localScale.y;
 
-            if (GM.sizeRatio + 1 <= 4)
+            if (GM.sizeRatio == 3)
             {
-                GM.sizeRatio += 2;
-                gameObject.transform.localScale = new Vector3(x / 1.5f, y / 1.5f, 1f);
-                partner.gameObject.transform.localScale = new Vector3(x2 * 1.5f, y2 * 1.5f, 1f);
+                GM.sizeRatio = 2;
+                Debug.Log("sizeRatio:" + GM.sizeRatio);
+                gameObject.transform.localScale = new Vector3(x / 2.25f, y / 2.25f, 1f);
+                partner.gameObject.transform.localScale = new Vector3(x2 * 2.25f, y2 * 2.25f, 1f);
+                //gameObject.transform.localScale = new Vector3(x / 1.5f, y / 1.5f, 1f);
+                //partner.gameObject.transform.localScale = new Vector3(x2 * 1.5f, y2 * 1.5f, 1f);
+            }
+            else if (GM.sizeRatio == 2)
+            {
+                GM.sizeRatio = 3;
+                Debug.Log("sizeRatio:" + GM.sizeRatio);
+                gameObject.transform.localScale = new Vector3(x * 2.25f, y * 2.25f, 1f);
+                partner.gameObject.transform.localScale = new Vector3(x2 / 2.25f, y2 / 2.25f, 1f);
+                //gameObject.transform.localScale = new Vector3(x / 1.5f, y / 1.5f, 1f);
+                //partner.gameObject.transform.localScale = new Vector3(x2 * 1.5f, y2 * 1.5f, 1f);
             }
         }
 
+        /**
         if (Input.GetKeyDown(KeyCode.Equals))
         {
             var x = gameObject.transform.localScale.x;
@@ -80,6 +118,7 @@ public class Player2Controller : MonoBehaviour {
                 partner.gameObject.transform.localScale = new Vector3(x2 / 1.5f, y2 / 1.5f, 1f);
             }
         }
+    **/
 
 
     }
