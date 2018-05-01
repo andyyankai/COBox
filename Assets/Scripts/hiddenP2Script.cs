@@ -5,6 +5,7 @@ using UnityEngine;
 public class hiddenP2Script : MonoBehaviour {
     public int P2count = 0;
     public AudioClip pickupSound;
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "collectable")
@@ -14,6 +15,9 @@ public class hiddenP2Script : MonoBehaviour {
             P2count += 1;
             Debug.Log("P2 Count: " + P2count);
         }
+
+
+
     }
     public int getCount()
     {

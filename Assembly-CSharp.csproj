@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{66840C39-BE28-B0AE-4313-CA19516A803E}</ProjectGuid>
+    <ProjectGuid>{54E9AB46-B386-F7E6-6F30-5E1E8310EC94}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -51,14 +51,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\checkpoint.cs" />
+     <Compile Include="Assets\DeathTriggerScript.cs" />
+     <Compile Include="Assets\fangshuiTrigger.cs" />
+     <Compile Include="Assets\GlobalControl.cs" />
      <Compile Include="Assets\jiguan1.cs" />
+     <Compile Include="Assets\Scripts\boat_movement.cs" />
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\GM.cs" />
+     <Compile Include="Assets\Scripts\hiddenP1Script.cs" />
+     <Compile Include="Assets\Scripts\hiddenP2Script.cs" />
      <Compile Include="Assets\Scripts\Level2_switch.cs" />
      <Compile Include="Assets\Scripts\MagneticField_N.cs" />
      <Compile Include="Assets\Scripts\MagneticField_S.cs" />
+     <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Player1Controller.cs" />
      <Compile Include="Assets\Scripts\Player2Controller.cs" />
+     <Compile Include="Assets\Scripts\score_update.cs" />
+     <Compile Include="Assets\Scripts\water_trigger.cs" />
+     <Compile Include="Assets\water_death_trigger.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

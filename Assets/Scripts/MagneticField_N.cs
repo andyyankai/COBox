@@ -12,20 +12,20 @@ public class MagneticField_N : MonoBehaviour {
 	// Use this for initialization
 	void Awake()
 	{
-		Debug.Log("start now!");
+		//Debug.Log("start now!");
 		rb = GetComponent<Rigidbody2D>();
 	}
 
 	// Update is called once per frame
 	void FixedUpdate()
 	{
-		Debug.Log("update now!");
+		//Debug.Log("update now!");
 	}
 
 	// Range of magnetic field
 	void OnTriggerStay2D(Collider2D other)
 	{
-		Debug.Log("update now!");
+		//Debug.Log("update now!");
 		Rigidbody2D other_rb = other.gameObject.GetComponent<Rigidbody2D>();
 
 		if (other.gameObject.tag == "Magnetic_S")

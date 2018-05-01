@@ -6,6 +6,9 @@ public class Player2Controller : MonoBehaviour {
 
     public float moveSpeed = 5;
     public GameObject partner;
+	public Sprite p2_mag;
+	public Sprite p2;
+    public AudioClip magSound;
 
     //public float mass;
     //mass:normal=2,small=1,big=3
@@ -14,9 +17,13 @@ public class Player2Controller : MonoBehaviour {
 	private bool mg_on = true;
 	private float mg_strength;
 
+	private SpriteRenderer spr;
+
+
     // Use this for initialization
     void Start () {
-		
+		spr = GetComponent<SpriteRenderer> ();
+		spr.sprite = p2_mag;
 	}
 	
 	// Update is called once per frame
@@ -62,15 +69,18 @@ public class Player2Controller : MonoBehaviour {
 		//disable mag
 		if (Input.GetKeyDown (KeyCode.Minus)) 
 		{
-			if (mg_on) {
+            AudioSource.PlayClipAtPoint(magSound, transform.position);
+            if (mg_on) {
 				MagneticField_S mf = gameObject.GetComponent<MagneticField_S> ();
 				mg_strength = mf.strength;
 				mf.strength = 0;
 				mg_on = false;
+				spr.sprite = p2;
 			} else {
 				MagneticField_S mf = gameObject.GetComponent<MagneticField_S> ();
 				mf.strength = mg_strength;
 				mg_on = true;
+				spr.sprite = p2_mag;
 			}
 		}
 
@@ -78,6 +88,7 @@ public class Player2Controller : MonoBehaviour {
         //change Size:
         if (Input.GetKeyDown(KeyCode.Equals))
         {
+            AudioSource.PlayClipAtPoint(magSound, transform.position);
             var x = gameObject.transform.localScale.x;
             var y = gameObject.transform.localScale.y;
             var x2 = partner.gameObject.transform.localScale.x;

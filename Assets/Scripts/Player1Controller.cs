@@ -7,6 +7,10 @@ public class Player1Controller : MonoBehaviour
 
     public float moveSpeed =5;
     public GameObject partner;
+	public Sprite p1_mag;
+	public Sprite p1;
+    public AudioClip magSound;
+
 
     //public float mass;
     //mass:normal=2,small=1,big=3
@@ -15,12 +19,16 @@ public class Player1Controller : MonoBehaviour
 	private bool mg_on = true;
 	private float mg_strength;
 
+	private SpriteRenderer spr;
 
     //Rigidbody2D rigidBody2D;
 
     // Use this for initialization
     void Start()
     {
+		spr = GetComponent<SpriteRenderer> ();
+
+        spr.sprite = p1_mag;
     }
 
     // Update is called once per frame
@@ -41,6 +49,7 @@ public class Player1Controller : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             transform.Translate(new Vector3(-1 * moveSpeed * Time.deltaTime, 0f, 0f));
+            
         }
         if (Input.GetKey(KeyCode.D))
         {
@@ -49,9 +58,11 @@ public class Player1Controller : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
+
             if (GM.sizeRatio ==3)
             {
                 transform.Translate(new Vector3(0f, 2f * moveSpeed * Time.deltaTime, 0f));
+
             }
             else
             {
@@ -68,15 +79,19 @@ public class Player1Controller : MonoBehaviour
 		//disable mag
 		if (Input.GetKeyDown (KeyCode.Q)) 
 		{
-			if (mg_on) {
+            AudioSource.PlayClipAtPoint(magSound, transform.position);
+            if (mg_on) {
 				MagneticField_N mf = gameObject.GetComponent<MagneticField_N> ();
 				mg_strength = mf.strength;
 				mf.strength = 0;
 				mg_on = false;
+				spr.sprite = p1;
 			} else {
 				MagneticField_N mf = gameObject.GetComponent<MagneticField_N> ();
 				mf.strength = mg_strength;
 				mg_on = true;
+				spr.sprite = p1_mag;
+
 			}
 		}
 
@@ -84,7 +99,7 @@ public class Player1Controller : MonoBehaviour
         //change Size
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-
+            AudioSource.PlayClipAtPoint(magSound, transform.position);
 
             var x = gameObject.transform.localScale.x;
             var y = gameObject.transform.localScale.y;
